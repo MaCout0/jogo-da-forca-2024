@@ -6,17 +6,11 @@ namespace JogoDaForca.ConsoleApp
     {
         static void Main(string[] args)
         {
-            /*
-            separar a palavra para analizar carcteres individuais
-
-            use case para desenhar a forca
-            */
-
             Random aleatorio = new Random();
             string[] frutas = ["ABACATE","ABACAXI","ACEROLA","ACAI","ARACA","BACABA","BACURI","BANANA","CAJU","CARAMBOLA","CUPUACU","GRAVIOLA","GOIABA","JABUTICABA","JENIPAPO","MACA","MANGABA","MANGA","MARACUJA","MURICI","PEQUI",
                 "PITANGA","PITAYA","SAPOTI","TANGERINA","UMBU","UVA","UVAIA"];
             int valorFruta = aleatorio.Next(frutas.Length);
-            string palavraSelecionada = "UVA";//frutas[valorFruta];
+            string palavraSelecionada = frutas[valorFruta];
             char[] separaPalavra = palavraSelecionada.ToCharArray();
             int tentativas = 5;
             char[] mostraLetra = new char[separaPalavra.Length];
@@ -26,32 +20,110 @@ namespace JogoDaForca.ConsoleApp
             }
 
 
-            while (true)
+            while (tentativas > 0)
             {
-
+                Console.Clear();
+                switch (tentativas)
+                {
+                    case 5:
+                        Console.WriteLine("____________________" +
+                                        "\n|/                  " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|_________          ");
+                        Console.WriteLine(new string(mostraLetra));
+                        break;
+                    case 4:
+                        Console.WriteLine("____________________" +
+                                        "\n|/                 o" +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|_________          ");
+                        Console.WriteLine(new string(mostraLetra));
+                        break;
+                    case 3:
+                        Console.WriteLine("____________________" +
+                                        "\n|/                 o" +
+                                        "\n|                 | " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|_________          ");
+                        Console.WriteLine(new string(mostraLetra));
+                        break;
+                    case 2:
+                        Console.WriteLine("____________________" +
+                                        "\n|/                 o" +
+                                        "\n|                 |x" +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|_________          ");
+                        Console.WriteLine(new string(mostraLetra));
+                        break;
+                    case 1:
+                        Console.WriteLine("____________________" +
+                                        "\n|/                 o" +
+                                        "\n|                 |x|" +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|                   " +
+                                        "\n|_________          ");
+                        Console.WriteLine(new string(mostraLetra));
+                        break;
+                }
                 Console.WriteLine("Digite uma letra: ");
                 char letraUser = Convert.ToChar(Console.ReadLine());
+                char letraUserMaiscula = Char.ToUpper(letraUser);
                 Console.WriteLine(palavraSelecionada);
+                int aux = 0;
 
 
                 for (int i = 0; i < separaPalavra.Length; i++)
                 {
-
-                    if (separaPalavra[i] == letraUser)
+                    if (separaPalavra[i] == letraUserMaiscula)
                     {
                         mostraLetra[i] = letraUser;
+                        aux++;
                     }
-
-                    //if (mostraLetra[i] != letraUser)
-                    //{
-                    //    tentativas--;
-                    //}
-
                 }
-                Console.WriteLine(new string(mostraLetra));
+
+                if (aux == 0)
+                {
+                    tentativas--;
+                }
                 
+
             }
-            Console.ReadLine();
+            if (tentativas == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("____________________" +
+                                "\n|/                 o" +
+                                "\n|                 |x|" +
+                                "\n|                  x" +
+                                "\n|                   " +
+                                "\n|                   " +
+                                "\n|                   " +
+                                "\n|_________          ");
+                Console.WriteLine(new string(mostraLetra));
+                Console.WriteLine("GAME OVER");
+                Console.ReadLine();
+            }
+            if (tentativas == -5)
+            {
+                Console.WriteLine("GAME WIN");
+                Console.ReadLine();
+            }
         }
     }
 }
