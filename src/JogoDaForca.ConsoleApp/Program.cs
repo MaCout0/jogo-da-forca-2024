@@ -13,6 +13,7 @@ namespace JogoDaForca.ConsoleApp
             string palavraSelecionada = frutas[valorFruta];
             char[] separaPalavra = palavraSelecionada.ToCharArray();
             int tentativas = 5;
+            int pontos = 0;
             char[] mostraLetra = new char[separaPalavra.Length];
             for (int i = 0; i < mostraLetra.Length; i++)
             {
@@ -94,7 +95,9 @@ namespace JogoDaForca.ConsoleApp
                     {
                         mostraLetra[i] = letraUser;
                         aux++;
+                        pontos++;
                     }
+                    
                 }
 
                 if (aux == 0)
@@ -102,6 +105,10 @@ namespace JogoDaForca.ConsoleApp
                     tentativas--;
                 }
                 
+                if(pontos == separaPalavra.Length)
+                {
+                    tentativas = -5;
+                }
 
             }
             if (tentativas == 0)
@@ -121,7 +128,9 @@ namespace JogoDaForca.ConsoleApp
             }
             if (tentativas == -5)
             {
+                Console.Clear();
                 Console.WriteLine("GAME WIN");
+                Console.WriteLine($"Parabéns as palavra era: {new string(mostraLetra)}");
                 Console.ReadLine();
             }
         }
